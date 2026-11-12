@@ -19,7 +19,7 @@ def get_stats(ids, counts=None):
     Optionally allows to update an existing dictionary of counts
     """
     counts = {} if counts is None else counts
-    for pair in zip(ids, ids[1:]):  # iterate consecutive elements
+    for pair in zip(ids, ids[1:]):  # iterate consecutive elements  # noqa: RUF007
         counts[pair] = counts.get(pair, 0) + 1
     return counts
 
@@ -115,10 +115,10 @@ class Tokenizer:
             f.write(f"{self.pattern}\n")
             # write the special tokens, first the number of them, then each one
             f.write(f"{len(self.special_tokens)}\n")
-            for special, idx in self.special_tokens.items():
+            for special, idx in self.special_tokens.items():  # noqa: FURB122
                 f.write(f"{special} {idx}\n")
             # the merges dict
-            for idx1, idx2 in self.merges:
+            for idx1, idx2 in self.merges:  # noqa: FURB122
                 f.write(f"{idx1} {idx2}\n")
         # write the vocab: for the human to look at
         vocab_file = file_prefix + ".vocab"
