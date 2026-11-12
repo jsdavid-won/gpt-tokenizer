@@ -56,7 +56,7 @@ class BasicTokenizer(Tokenizer):
 
     def encode(self, text):
         """
-        Returning the list of ints corresponding to text.
+        Return the list of ints corresponding to text.
 
         Each integer in the list represents a vocab index.
         """
