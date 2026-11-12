@@ -1,9 +1,8 @@
 """
 Contains the base Tokenizer class and a few common helper functions.
 The base class also contains the (common) save/load functionality.
-It would be possible to be a lot more strict about the interface and
-e.g. isolating all regex/pattern parts to the RegexTokenizer, but
-some concessions are made for simplicity.
+It's possible to be a lot more strict about the interface (e.g., isolating all regex/
+pattern parts to the RegexTokenizer), but some concessions are made for simplicity.
 """
 
 import unicodedata
@@ -26,8 +25,8 @@ def get_stats(ids, counts=None):
 
 def merge(ids, pair, idx):
     """
-    In the list of integers (ids), replace all consecutive occurrences
-    of pair with the new integer token idx
+    In the list of integers (ids), replace all consecutive occurrences of pair with the
+    new integer token idx
     Example: ids=[1, 2, 3, 1, 2], pair=(1, 2), idx=4 -> [4, 3, 4]
     """
     newids = []
@@ -125,11 +124,10 @@ class Tokenizer:
         inverted_merges = {idx: pair for pair, idx in self.merges.items()}
         with open(vocab_file, "w", encoding="utf-8") as f:
             for idx, token in self.vocab.items():
-                # note: many tokens may be partial utf-8 sequences
-                # and cannot be decoded into valid strings. Here we're using
-                # errors='replace' to replace them with the replacement char �.
-                # this also means that we couldn't possibly use .vocab in load()
-                # because decoding in this way is a lossy operation!
+                # note: many tokens may be partial utf-8 sequences and cannot be decoded
+                # into valid strings. Here we're using errors='replace' to replace them
+                # with the replacement char �. This also means we couldn't possibly use
+                # .vocab in load() because decoding in this way is a lossy operation!
                 s = render_token(token)
                 # find the children of this token, if any
                 if idx in inverted_merges:
@@ -139,8 +137,8 @@ class Tokenizer:
                     s1 = render_token(self.vocab[idx1])
                     f.write(f"[{s0}][{s1}] -> [{s}] {idx}\n")
                 else:
-                    # otherwise this is leaf token, just print it
-                    # (this should just be the first 256 tokens, the bytes)
+                    # otherwise this is leaf token, just print it (this should just be
+                    # the first 256 tokens, the bytes)
                     f.write(f"[{s}] {idx}\n")
 
     def load(self, model_file):
