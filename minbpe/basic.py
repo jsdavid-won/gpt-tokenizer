@@ -1,3 +1,13 @@
+"""
+Minimal (byte-level) BPE tokenizer.
+
+Algorithmically follows along the GPT tokenizer (mostly):
+https://github.com/openai/gpt-2/blob/master/src/encoder.py
+
+Unlike the actual GPT tokenizer, BasicTokenizer does not handle the regex splitting
+or any special tokens.
+"""
+
 from .base import Tokenizer, get_stats, merge
 
 
